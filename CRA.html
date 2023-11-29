@@ -101,12 +101,12 @@
             padding: 7px; /* epaisseur des lignes a droite */
         }
 		
-		.table-dte-sign {
-		color: #00c462;
-		font-size: 12px;
-		font-weight: lighter;
-		padding-top: 10px;
-		}
+	.table-dte-sign {
+	     color: #00c462;
+	     font-size: 12px;
+	     font-weight: lighter;
+	     padding-top: 10px;
+	}
 
         .weekend {
             background-color: #F1F1F1;
@@ -114,8 +114,22 @@
 
         .table-header {
             font-weight: bold;
-            color: #4E4E4E;
+	    font-size: 18px;
+            color: #00c462;
         }
+		
+	.column-jour {
+	     width: 70px;
+	}
+		
+	.column-duree {
+	     text-align: center;
+	     width: 70px;
+	}
+		
+	.column-note {
+	     padding-left: 30px;
+	}
 
 	@media print {
 	     body {
@@ -178,8 +192,6 @@
 				</tr>
 				</table>
 				</div>
-				<br>
-				<br>
 				<br>
             </div>
 
@@ -280,28 +292,27 @@
 				{	day: 30,	duration: 0,	note: "",},
 				{	day: 31,	duration: 0,	note: "",},
 			];
+		
             // En-tête du tableau
             let headerRow = document.createElement("div");
             headerRow.className = "table-row";
 
             let headerCellDay = document.createElement("div");
-            headerCellDay.className = "table-cell table-header";
+            headerCellDay.className = "table-cell table-header table-header-jour column-jour";
             headerCellDay.textContent = "Jour";
             headerRow.appendChild(headerCellDay);
 
             let headerCellDuration = document.createElement("div");
-            headerCellDuration.className = "table-cell table-header";
+            headerCellDuration.className = "table-cell table-header table-header-duree column-duree";
             headerCellDuration.textContent = "Durée";
             headerRow.appendChild(headerCellDuration);
 
             let headerCellNote = document.createElement("div");
-            headerCellNote.className = "table-cell table-header";
+            headerCellNote.className = "table-cell table-header table-header-note column-note";
             headerCellNote.textContent = "Note";
             headerRow.appendChild(headerCellNote);
 
             table.appendChild(headerRow);
-			
-			
 			
             // Corps du tableau
             for (let day = 1; day <= daysInMonth; day++) {
@@ -309,7 +320,7 @@
                 row.className = "table-row";
 
                 let cellDay = document.createElement("div");
-                cellDay.className = "table-cell";
+                cellDay.className = "table-cell table-cell-jour column-jour";
                 cellDay.textContent = formatDate(today.getFullYear(), today.getMonth(), day);
                 if (isWeekend(today.getFullYear(), today.getMonth(), day)) {
                     cellDay.classList.add("weekend");
@@ -317,7 +328,7 @@
                 row.appendChild(cellDay);
 				
                 let cellDuration = document.createElement("div");
-                cellDuration.className = "table-cell";
+                cellDuration.className = "table-cell table-cell-duree column-duree";
 				cellDuration.textContent = durations[day - 1].duration;
 				if (isWeekend(today.getFullYear(), today.getMonth(), day)) {
                     cellDuration.classList.add("weekend");
@@ -325,7 +336,7 @@
                 row.appendChild(cellDuration);
 
                 let cellNote = document.createElement("div");
-                cellNote.className = "table-cell";
+                cellNote.className = "table-cell table-cell-note column-note";
 				cellNote.textContent = durations[day - 1].note;
                 if (isWeekend(today.getFullYear(), today.getMonth(), day)) {
                     cellNote.classList.add("weekend");
